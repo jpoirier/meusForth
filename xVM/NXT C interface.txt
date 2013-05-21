@@ -1,0 +1,81 @@
+
+
+
+//lejos.nxt.LCD
+void drawString(int8_t*, int32_t, int32_t)
+int32_t drawInt(int32_t, int32_t, int32_t)
+void drawInt(int32_t, int32_t, int32_t, int32_t)
+void refresh(void)
+void clear(void)
+void setDisplay([int32_t)
+int8_t* getDisplay(void)
+void setAutoRefresh(int32_t)
+void bitBlt(int8_t*, int32_t, int32_t, int32_t, int32_t, int8_t*, int32_t, int32_t, int32_t, int32_t, int32_t, int32_t, int32_t)
+int8_t* getSystemFont(void)
+
+//lejos.nxt.Battery
+int32_t getVoltageMilliVolt(void)
+
+//lejos.nxt.Button
+int32_t getButtons(void)
+
+//lejos.nxt.MotorPort
+int32_t getTachoCountById(int32_t)
+void controlMotorById(int32_t, int32_t, int32_t)
+void resetTachoCountById(int32_t)
+
+//lejos.nxt.SensorPort
+void i2cEnableById(int32_t)
+int32_t i2cBusyById(int32_t)
+int32_t i2cStartById(int32_t, int32_t, int32_t, int32_t, int8_t*, int32_t, int32_t)
+void i2cDisableById(int32_t)
+
+//lejos.nxt.Sound
+void playFreq(int32_t, int32_t, int32_t)
+void playSample(int32_t, int32_t, int32_t, int32_t, int32_t)
+int32_t getTime(void)
+
+//lejos.nxt.comm.Bluetooth
+void btSend(int8_t*, int32_t)
+void btReceive(int8_t*)
+int32_t btGetBC4CmdMode(void)
+void btSetArmCmdMode(int32_t)
+void btStartADConverter(void)
+void btSetResetLow(void)
+void btSetResetHigh(void)
+int32_t btWrite(int8_t*, int32_t, int32_t)
+int32_t btRead(int8_t*, int32_t, int32_t)
+int32_t btPending(void)
+
+//lejos.nxt.comm.USB
+int32_t usbRead(int8_t*, int32_t, int32_t)
+int32_t usbWrite(int8_t*, int32_t, int32_t)
+void usbReset(void)
+
+//lejos.nxt.Flash
+void writePage([int8_t, int32_t)
+void readPage([int8_t, int32_t)
+void exec(int32_t, int32_t)
+
+//lejos.nxt.DebugInterface
+void executeProgram(int32_t)
+void setDebug(void)
+int32_t peekWord(int32_t)
+int32_t eventOptions(int32_t, int32_t)
+void suspendThread(char*)
+void resumeThread(char*)
+
+//System
+int32_t getProgramExecutionsCount(void)
+int32_t getFirmwareRevision(void)
+int32_t getFirmwareMajorVersion(void)
+int32_t getFirmwareMinorVersion(void)
+
+//USB
+void usbSetSerialNo(int8_t*)
+void usbSetName(int8_t*)
+int32_t usbStatus(void)
+void usbEnable(int32_t)
+void usbDisable(void)
+
+

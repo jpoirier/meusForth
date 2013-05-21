@@ -1,0 +1,15 @@
+meusForth(19863) malloc: *** error for object 0x10007bf40: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+meusForth(19870) malloc: *** error for object 0x10007bf40: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+meusForth(21150) malloc: *** error for object 0x100085160: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+meusForth(1093) malloc: *** error for object 0x100084340: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+meusForth(4013) malloc: *** error for object 0x1000855c0: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+
+ ---------------- 
+: Undefined error: 0
+Sat Dec 20 17:09:23 2008
+: Undefined error: 0

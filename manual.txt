@@ -1,0 +1,116 @@
+meusForth and xVM, what are they
+--------------------------------
+meusForth is a Forth implementation - Forth is a stack based programming language invented by Chuck 
+Moore back in the 1960s. xVM is a true byte-code interpreter. 
+
+meusForth's core functionality consists of a terminal interface, a token lexer, and a byte-compiler. xVM's
+main functionality is a token threaded interpreter.
+
+
+    xVM is a small, compact, portable virtual stack processor, or more commonly a byte code interpreter. It's written in ANSI C99 and can compiled within an application for a desktop or an embedded system where it is used as an interpreter engine. xVM compiled as a library on OS X is approximately 24 KB in size.  
+
+    meusForth is a command-line outer-interpreter that's used for writing, running, compiling, and debugging code that will run on the xVM interpreter engine.  
+
+    With meusForth from the command-line you can:
+    - Program, run, and debug code interactively.
+    - Run code in a text file.  
+    - Compile code to byte-code and save as binary data to a file.
+    - Compile code to byte-code and save as a "C" array to file.
+
+What's the purpose of meusForth and xVM
+---------------------------------------  
+To learn Forth. To replace the LeJos project's Java VM with xVM.  
+
+Why you should give it a try
+----------------------------
+
+DIRECTIVES
+----------
+  HELP         Provides help on a specific word or directive. Syntax: \"HELP BLABLA\" where \"BLABLA\" is the word
+  HELPALL      List all the existing words and directives
+  IF           ( flag -- ) Start of conditional 'IF' statement .. IF .. ELSE .. THEN
+  ELSE         ( -- ) Optional part of conditional 'IF' statement .. IF .. ELSE .. THEN
+  THEN         ( -- ) Finish of conditional 'IF' statement .. IF .. ELSE .. THEN
+  BEGIN        ( -- ) Start of BEGIN ... UNTIL loop
+  UNTIL        ( flag -- ) Finish of BEGIN ... UNTIL loop, where loop repeats if flag equals 0
+  DO           ( Ne Ns -- ) ( R: -- Ne Ns ) Starts a counted loop. Cycle from Ns to Ne. Also see LOOP, I, J. Example: 10 0 DO
+  LOOP         ( R: Ne Ns -- ) Finish a counted loop. Cycle from Ns to Ne. Also see DO, I, J
+  I            ( -- x ) Put the inner loop counter on the stack. Also see DO, LOOP, I
+  J            ( -- x ) Put the outer loop counter on the stack. Also see DO, LOOP, J
+  LEAVE        ( -- ) Immediately exit the current loop. Also see DO, LOOP",
+  :            ( -- ) Start of a word definition. The following example defines the word FOO> : FOO 1 2 + ;
+  ;            ( -- ) End of a word definition. Also see : and #FUNCTION
+  FILE         Open the specified file. Example: FILE MyFile.f
+  INCLUDE      Include the specified file. Files can be nested. Example: INCLUDE my_file.f
+  #INCLUDE     Include the specified file. Files can be nested. Example: #INCLUDE my_file.f
+  COMPA        Compile vocabulary to a file in array format. Example: COMPA byte_array.c
+  COMPB        Compile vocabulary to a file in binary format. Example: COMB forthFile.fd
+  #DEFINE      Create a simple 'C' like macro definition. Example: #define PortA 0x80"
+  RESET        Reset the compiler, forgetting vocabulary
+  DEBUG        Switch on the debug mode
+  NODEBUG      Switch off the debug mode
+  BASE         Indicate the current base, HEX or DECIMAL
+  HEX          Change the base to HEX
+  RECURSE      Recursively call the function that recurse is defined in. 
+  DECIMAL      Change the base to DECIMAL
+  WORDS        List the words in the vocabulary
+
+
+WORDS
+-----
+  DROP      ( x -- ) Remove x from the top of the stack
+  2DROP     ( x1 x2 -- ) Drop the cell pair x1 and x2 from the stack
+  DUP       ( x -- x x ) Duplicate x
+  2DUP      ( x1 x2 -- x1 x2 x1 x2 ) Duplicate the cell pair x1 x2
+  SWAP      ( x1 x2 -- x2 x1 ) Swap the top two cell pairs
+  PICK      ( +n -- x ) Put a copy of the n'th stack item on the top of the stack
+  2SWAP     ( x1 x2 x3 x4 -- x3 x4 x1 x2 ) Swap the top cell pairs on the stack
+  OVER      ( x1 x2 -- x1 x2 x1 ) Put a copy of the second element on the top of the stack
+  2OVER     ( x1 x2 x3 x4 -- x1 x2 x3 x4 x1 x2 ) Put a copy of the second set of elements on the top of the stack
+  ROT       ( x1 x2 x3 -- x2 x3 x1 ) Rotate the top three elements of the stack
+  2ROT      ( x1 x2 x3 x4 x5 x6 -- x3 x4 x5 x6 x1 x2) Rotate the top three element pairs of the stack
+  NIP       ( x1 x2 -- x2 ) Remove the second element from the stack
+  TUCK      ( x1 x2 -- x2 x1 x2) Put a copy of the top stack item below the second stack item
+  >R        (D: x -- ) (R: -- x ) Transfer the top of stack to the return stack
+  2>R       (D: x1 x2 -- ) (R: -- x1 x2 ) Transfer the top two elements of the stack to the return stack
+  R>        (D: -- x ) (R: x -- ) Transfer the top of the return stack to data stack
+  2R>       (D: -- x1 x2 ) (R: x1 x2 -- ) Transfer the top two elements of the return stack to data stack
+  R@        (D: -- x ) (R: x -- x ) Copy the top of the return stack to data stack
+  2R@       (D: -- x1 x2 ) (R: x1 x2 -- x1 x2 ) Copy the top two elements of the return stack to the data stack
+  @         ( addr -- x ) Reads 'x' from the specified RAM address 'addr' and places it on the top of the stack
+  !         ( x addr -- ) Writes 'x' to the specified RAM address 'addr'
+  AND       ( x1 x2 -- x1&x2 ) Bitwise AND of the top two elements of the stack
+  OR        ( x1 x2 -- x1|x2 ) Bitwise OR of the top two elements of the stack
+  XOR       ( x1 x2 -- x1^x2 ) Bitwise XOR of the top two elements of the stack
+  NOT       ( x -- ~x ) Bitwise NOT of the top two element of the stack
+  <<        ( x u -- x<<u ) Shifts 'x' 'u' bits to the left
+  >>        ( x u -- x>>u ) Shifts 'x' 'u' bits to the right
+  1+        ( x -- x+1 ) Increment 'x' by a value of 1
+  1-        ( x -- x-1 ) Decrement 'x' by a value of 1
+  +         ( x1 x2 -- x1+x2 ) Add x1 to x2
+  -         ( x1 x2 -- x1-x2 ) Subtract x2 from x1
+  *         ( x1 x2 -- x1*x2 ) Multipy x1 by x2
+  /         ( x1 x2 -- x1/x2 ) Divide x1 by x2
+  */        ( x1 x2 x3 -- x1*x2/x3 ) Multiply x1 by x2 then divide the result by x3. The intermediate result is a 32 bit value
+  >         ( x1 x2 -- flag ) If x1 is greater-than x2 then flag equals -1 else flag equals 0
+  <         ( x1 x2 -- flag ) If x1 is less-than x2 then flag equals -1 else flag equals 0
+  >=        ( x1 x2 -- flag ) If x1 is greater-than or equal to x2 then flag equals -1 else flag equals 0
+  <=        ( x1 x2 -- flag ) If x1 is less-than or equal to x2 then flag equals -1 else flag equals 0
+  =         ( x1 x2 -- flag ) If x1 is equal to x2 then flag equals -1 else flag equals 0
+  <>        ( x1 x2 -- flag ) If x1 is not-equal to x2 then flag equals -1 else flag equals 0
+  =0        ( x -- flag ) If x is equal to 0 then flag equals -1 else flag equals 0
+  <>0       ( x -- flag ) If x is not-equal to 0 then flag equals -1 else flag equals 0
+  >0        ( x -- flag ) If x is greater-than 0 then flag equals -1 else flag equals 0
+  <0        ( x -- flag ) If x is less-than 0 then flag equals -1 else flag equals 0
+  PC        ( -- pc ) Put the 'Program Counter' on the top of stack
+  SP        ( -- sp ) Put the 'Data Stack Pointer' on the top of stack
+  RP        ( -- rp ) Put the 'Return Stack Pointer' on the top of stack
+  FLUSH     ( x1 x2 x3... -- ) Flush the data stack of all elements
+  .         ( x -- ) Print the top of the stack
+  ." ..."   ( x -- ) Print the string encased in quotes. Note a space is required after the first quote.
+  F1+       ( x1 -- x1+1 ) Increment (floating point) x1 by 1
+  F+        ( x1 x2 -- x1+x2 ) Add (floating point) x1 to x2
+  F-        ( x1 x2 -- x1-x2 ) Subtract (floating point) x2 from x1
+  F*        ( x1 x2 -- x1*x2 ) Multipy (floating point) x1 by x2
+  F/        ( x1 x2 -- x1/x2 ) Divide (floating point) x1 by x2
+  F*/       ( x1 x2 x3 -- x1*x2/x3 ) Multiply (floating point) x1 by x2 then divide the result by x3. The intermediate result is a 32 bit. 

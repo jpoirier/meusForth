@@ -1,0 +1,67 @@
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(78075) malloc: *** error for object 0x102016600: non-page-aligned, non-allocated pointer being freed
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: double free
+*** set a breakpoint in malloc_error_break to debug
+meusForth(7426) malloc: *** error for object 0x102016600: non-page-aligned, non-allocated pointer being freed
+*** set a breakpoint in malloc_error_break to debug
+meusForth(4206) malloc: *** mmap(size=-4328611840) failed (error code=12)
+*** error: can't allocate region
+*** set a breakpoint in malloc_error_break to debug
+meusForth(4221) malloc: *** mmap(size=-4328607744) failed (error code=12)
+*** error: can't allocate region
+*** set a breakpoint in malloc_error_break to debug
+Processing '/usr/local/etc/joe/joerc'...done
+
+File (Unnamed) not saved.
+sh: test_prims-with_floats.f: command not found
+meusForth(11739) malloc: *** error for object 0x101b014d0: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+meusForth(11739) malloc: *** error for object 0x101b014d0: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+sh: s: command not found
+meusForth(12218) malloc: *** error for object 0x101b01290: Non-aligned pointer being freed (2)
+*** set a breakpoint in malloc_error_break to debug
+sh: nanoaaa: command not found
+

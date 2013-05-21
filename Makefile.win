@@ -1,0 +1,58 @@
+#
+#
+# Makefile.sb
+#
+#
+
+OS_PLATFORM = WIN
+HW_PLATFORM = PC
+
+DIR_LIB = ../readline
+TERMCAP_LIB = -ltermcap
+READLINE_LIB = ../readline/libreadline.a
+HISTORY_LIB = ../readline/libhistory.a
+
+ifeq "$(gcc)" "true"
+	PLATFORM_COMPILER = GCC
+	OPTIONS = -std=c99 -DHAVE_VA_COPY -DPC_PLATFORM -DDWIN32
+	CC = gcc
+	CXX = g++
+	AR = ar
+else
+	PLATFORM_COMPILER = INTEL
+	OPTIONS = /Qstd=c99 /D__STDC__ /D_CRT_SECURE_NO_DEPRECATE /D_CRT_SECURE_NO_WARNINGS /D_CONSOLE /DCONSOLEs /Dconsole /DWIN32 -align -Wpointer-arith -Wuninitialized -DPC_PLATFORM
+	CC = icc
+	CXX = icpc
+	AR = xiar
+endif
+
+ifeq "$(debug)" "true"
+    OPTIONS += -g -DDEBUG
+else
+#-DNDEBUG 
+    OPTIONS += -O3 --DSPopt --softpipe --unroll --vectoropt --loop --peep -dvectinfo --whole
+endif
+
+
+
+
+CC = 
+CXX = 
+AR = 
+LD = 
+RM = erase /Q
+
+COPY = $(SBROOT)/bin/cp.exe
+AROPTIONS = -rcs
+
+OPTIONS += -Wall -DCONSOLE_MODE
+
+EXE_EXT = .exe
+LIB_EXT = lib
+
+INCLUDE =
+
+export
+
+include ./makefile.common
+

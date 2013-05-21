@@ -1,0 +1,262 @@
+################################################################################
+#
+# @file                  makefile.common
+# @version               
+# @date                  
+# @author                Joseph Poirier
+#
+# @brief                 Makefile for the
+#
+# Status                 DRAFT
+#
+# Revision History:
+#
+# - 
+#
+# 
+#
+################################################################################
+
+
+
+################################################################################
+# OS platform specific assignments
+#
+# 
+# Set the platform specific "working directory" command. Note, on MSW if using
+# a virtually mapped drive with PRJBASE set as the root there's an extra "\" appended
+# to the output, which causes the build to fail; you get somehting like the following
+# on the output:  X:\/                   I.E. two path separators
+#
+#
+
+ifeq "$(OS_PLATFORM)" "OSX"
+    PRJBASE = $(shell pwd)
+    COPY = cp
+endif
+
+ifeq "$(OS_PLATFORM)" "NIX"
+    PRJBASE = $(shell pwd)
+    COPY = cp
+endif
+
+ifeq "$(OS_PLATFORM)" "WIN"
+    PRJBASE = $(shell cd)
+    COPY = copy
+endif
+
+
+#--- Not used, just for reference ---
+# Bash shell's "present working directory"
+#WNBASE = ${PWD}
+# Unix Make pwd
+#WNBASE = `pwd`
+# GMake - Windows: current directory, *nix: present working directory
+#WNBASE = $(shell cd)
+#WNBASE = $(shell pwd)
+
+################################################################################
+# Set the debug mode
+#
+ifeq "$(debug)" "false"
+    OPTIONS += -DNDEBUG
+else
+    OPTIONS += -g -DDEBUG
+endif
+
+ifeq "$(noopt)" "true"
+	# Nothing here
+else
+    OPTIONS += -O3
+endif
+
+
+################################################################################
+# For building multiple library files, see the list, in a single step. 
+#
+Build_Modules = \
+				build_meusforth
+#				build_xvm
+
+				
+               
+Clean_Modules = \
+				clean_meusforth 
+#				clean_xvm
+
+
+
+
+################################################################################
+#--- Setup the library directory  
+#
+#
+LIBDIR = 
+
+################################################################################
+#--- Setup some base directories and append the necessary paths  
+#
+#
+
+#--- All of the projects additional include directories
+# WNBASE
+INCLUDE += -I.
+INCLUDE += -I../xVM
+
+################################################################################
+# Path variables
+#
+#--- 
+MEUSFORTH_BUILD_MAKE_PATH = $(PRJBASE)/meusForth
+
+#--- 
+XVM_MAKE_PATH = $(PRJBASE)/xVM
+
+################################################################################
+# Misc. stuf
+#
+LIBFILE = *.$(LIB_EXT)
+OBJS = *.o
+
+################################################################################
+#
+#
+all: $(Build_Modules)
+
+ifndef PRJBASE
+	@echo "No platform defined!"
+	@exit 2 
+endif
+
+build_test:
+
+ifndef PRJBASE
+	@echo "No platform defined!"
+	@exit 2 
+endif
+	
+build_meusforth:
+
+ifndef PRJBASE
+	@echo "No platform defined!"
+	@exit 2 
+endif
+
+	$(MAKE) -C $(MEUSFORTH_BUILD_MAKE_PATH)
+	
+build_xvm:
+
+ifndef PRJBASE
+	@echo "No platform defined!"
+	@exit 2 
+endif
+
+	$(MAKE) -C $(XVM_MAKE_PATH)
+
+preprocess:
+ifndef PRJBASE
+	@echo "No platform defined!"
+	@exit 2 
+endif
+
+	$(MAKE) -C $(MEUSFORTH_BUILD_MAKE_PATH) preprocess
+
+
+# To compile a single file from the command line use the following command:
+#      > make -f Makefile.nix build_file file=PATH/TO/FILE/myFile.c
+build_file:
+	$(CC) -c $(OPTIONS) $(INCLUDE) $(file)
+	
+################################################################################
+#
+#
+clean: $(Clean_Modules)
+
+clean_meusforth:
+	$(MAKE) -C $(MEUSFORTH_BUILD_MAKE_PATH) clean
+	 
+clean_xvm:
+	$(MAKE) -C $(XVM_MAKE_PATH) clean
+	
+clean_file:
+	$(RM) $(file)
+	
+################################################################################
+#
+#
+.help-common:
+	@echo "----------------------------------------------------------------------"
+	@echo "   The following are very brief explanations of the different types of"
+	@echo "builds available along with some simple examples of the commands"
+	@echo "necessary to get the desired output."
+	@echo ""
+	@echo "   Note that in all cases a platform specific make file must be passed "
+	@echo "to make using the "-f" command. The current platform specific files are"
+	@echo "Makefile.sb and Makefile.nix."
+	@echo ""
+	@echo "   For more information concerning a specific type of build read the "
+	@echo "makefile.common file."
+	@echo ""
+	@echo "----------------------------------------------------------------------"
+	@echo ""
+	@echo "Monolithic builds - creates an executable as the final output."
+	@echo "These can be built and cleaned using a command similar to the following:"
+	@echo ""
+	@echo "        > make -f Makefile.sb build_mono"
+	@echo "        > make -f Makefile.sb clean_mono"
+	@echo ""
+	@echo "        build_mono"
+	@echo "        build_mono_outer"
+	@echo "        build_mono_inner"
+	@echo "        build_sb3011_tx_test"
+	@echo ""
+	@echo "        clean_mono"
+	@echo ""
+	@echo ""
+	@echo "Group of library files - creates multiple library files as the final output."
+	@echo "These can be built and cleaned as a group using a command similar to the following:"
+	@echo ""
+	@echo "        > make -f Makefile.nix all"
+	@echo "        > make -f Makefile.nix clean"
+	@echo ""
+	@echo "        build_common"
+	@echo "        build_exception"
+
+	@echo ""
+	@echo ""
+	@echo "Individual library files - creates a library file as the final output."
+	@echo "    These can be built and cleaned on an individual basis using"
+	@echo "    a command similar to the following:"
+	@echo ""
+	@echo "        > make -f Makefile.sb build_common"
+	@echo "        > make -f Makefile.sb clean_common"
+	@echo ""
+	@echo "        build_common"
+	@echo "        build_exception"
+
+	@echo ""
+	@echo "        clean_common"
+
+	@echo ""
+	@echo ""
+	@echo "Test builds - creates an executable as the final output."
+	@echo ""
+	@echo "        build_common_tests"
+
+	@echo ""
+	@echo ""
+	@echo "Individual file - you can build a single file using the following syntax:"
+	@echo "Mainly used from an editor, as a sanity check, while making modifications "
+	@echo "to a file."
+	@echo ""
+	@echo "    > make -f Makefile.nix build_file file=PATH/TO/FILE/myFile.c"
+	@echo "    > make -f Makefile.nix clean_file file=PATH/TO/FILE/myFile.o"
+	@echo ""
+	@echo ""
+	@echo "To view the WNBASE path:"
+	@echo ""
+	@echo "    > make -f Makefile.* build_test"
+	@echo ""
+	@echo ""
+
+
